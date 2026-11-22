@@ -1,111 +1,105 @@
+/* ========================================================
+   SISTEMA GESTOR Y ANALIZADOR DE GASTOS HORMIGA
+   Paleta: Negro, Plomo, Azul, Amarillo y Verde
+   Diseño de Alta Fidelidad, Moderno y 100% Responsive
+======================================================== */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* 1. NEGRO (Obsidian & Deep Dark Elements) */
+  --black-950: #06090e;
+  --black-900: #0b0f19;
+  --black-800: #0f172a;
+  --black-700: #182234;
+  --black-surface: #111827;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* 2. PLOMO (Slate & Cool Metallic Grays) */
+  --plomo-bg:      #F1F5F9; /* Fondo general moderno */
+  --plomo-surface: #FFFFFF; /* Superficie de tarjetas */
+  --plomo-card-alt:#F8FAFC; /* Contenedores secundarios */
+  --plomo-border:  #CBD5E1; /* Bordes nítidos de tarjetas */
+  --plomo-subtle:  #E2E8F0; /* Divisores y líneas */
+  --plomo-light:   #EBEFF5; /* Fondos de chips */
+  --plomo-text:    #1E293B; /* Texto principal de alto contraste */
+  --plomo-muted:   #475569; /* Texto secundario legible */
+  --plomo-slate:   #64748B; /* Texto terciario e iconos */
+  --plomo-dark:    #334155; /* Encabezados oscuros */
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* 3. AZUL (Royal Blue & Tech Accents) */
+  --blue-900: #1e3a8a;
+  --blue-800: #1e40af;
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-200: #bfdbfe;
+  --blue-100: #dbeafe;
+  --blue-50:  #eff6ff;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* 4. AMARILLO (Vibrant Gold & Alert Hormiga) */
+  --yellow-900: #713f12;
+  --yellow-800: #854d0e;
+  --yellow-700: #a16207;
+  --yellow-600: #ca8a04;
+  --yellow-500: #eab308;
+  --yellow-400: #facc15;
+  --yellow-300: #fde047;
+  --yellow-200: #fef08a;
+  --yellow-100: #fef9c3;
+  --yellow-50:  #fefce8;
+
+  /* 5. VERDE (Emerald & Financial Health) */
+  --green-900: #064e3b;
+  --green-800: #065f46;
+  --green-700: #047857;
+  --green-600: #059669;
+  --green-500: #10b981;
+  --green-400: #34d399;
+  --green-200: #a7f3d0;
+  --green-100: #d1fae5;
+  --green-50:  #ecfdf5;
+
+  /* Blanco */
+  --white: #FFFFFF;
+
+  /* Danger / Error */
+  --red-600: #dc2626;
+  --red-100: #fee2e2;
+  --red-50:  #fef2f2;
+
+  /* Sombras y elevaciones profesionales */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-sm: 0 2px 5px -1px rgba(15, 23, 42, 0.08), 0 1px 3px -1px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 18px -3px rgba(15, 23, 42, 0.10), 0 3px 6px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 16px 32px -4px rgba(15, 23, 42, 0.12), 0 6px 14px -3px rgba(15, 23, 42, 0.06);
+
+  /* Radios */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--plomo-bg);
+  color: var(--plomo-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+button, input, select, textarea {
+  font-family: inherit;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+a {
+  color: var(--blue-600);
+  text-decoration: none;
 }

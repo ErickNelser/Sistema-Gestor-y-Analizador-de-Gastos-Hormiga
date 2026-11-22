@@ -1,32 +1,68 @@
-# React + TypeScript + Vite
+# Frontend - Sistema Gestor y Analizador de Gastos Hormiga
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicación web desarrollada en **React + TypeScript + Vite** para el análisis inteligente de gastos en lenguaje natural, categorización automática, detección de gastos hormiga y seguimiento de metas de ahorro.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎨 Paleta de Colores y Diseño
+El diseño ha sido optimizado profesionalmente utilizando una combinación cromática equilibrada, limpia y accesible:
+- **Azul (`#1E3A8A`, `#2563EB`)**: Identidad visual, botones principales, métricas de balance total y acentos clave.
+- **Beige (`#FBF8F3`, `#F5EFEB`, `#EADBCE`)**: Fondo cálido general, bordes suaves, chips y etiquetas secundarias, brindando descanso visual.
+- **Verde (`#059669`, `#10B981`)**: Salud financiera, metas de ahorro, barra de progreso y avisos positivos.
+- **Blanco (`#FFFFFF`)**: Superficie de tarjetas (cards), filas de datos e inputs con contraste nítido.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📦 Estructura de Cards e Interfaz
+1. **Registro Inteligente**: Formulario con soporte para lenguaje natural (*"Ayer gasté 5 en pasaje, 16 en dos salteñas y hoy 10 en cafecito"*) y botones rápidos de prueba (chips).
+2. **Resumen Financiero (4 KPI Cards)**:
+   - Total Gastado General.
+   - Total Gastos Hormiga (fugas detectadas ≤ 20 Bs).
+   - % de Impacto Hormiga.
+   - Proyección Anual estimada a 365 días.
+3. **Meta de Ahorro**: Barra de progreso interactiva y formulario para fijar objetivo financiero en Bs.
+4. **Resumen por Categoría**: Ranking ordenado de mayor a menor con indicadores de tipo de gasto.
+5. **Historial de Gastos Responsive**:
+   - Pestañas de filtrado: *Todos*, *🐜 Solo Hormiga*, *📋 Comunes*.
+   - Buscador en tiempo real por concepto o categoría.
+   - Tabla adaptable en escritorio y tarjetas independientes en dispositivos móviles.
+   - Filas de gastos hormiga resaltadas con distintivo visual.
+   - Botón de borrado directo.
 
-## Expanding the Oxlint configuration
+---
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🚀 Instrucciones de Ejecución
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### 1. Requisitos Previos
+- Node.js (v18 o superior)
+- npm
+
+### 2. Configuración de Conexión con el Backend
+El archivo `.env` permite configurar la IP o URL del backend al cual Vite redirige las peticiones `/api`:
+
+```bash
+# Desarrollo local (Backend en la misma máquina):
+VITE_API_URL=http://localhost:3000
+
+# Despliegue en Máquinas Virtuales (VM 2 Ubuntu):
+# VITE_API_URL=http://192.168.56.20:3000
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### 3. Modo Desarrollo
+```bash
+npm install
+npm run dev
+```
+La aplicación estará disponible en `http://localhost:5173`.
+
+### 4. Compilación para Producción (Nginx / VM 1)
+```bash
+npm run build
+```
+Los archivos estáticos listos para producción se generan en la carpeta `dist/`.
+En Nginx (VM 1), configura la raíz hacia esta carpeta `dist/` y el proxy inverso para `/api`:
+```nginx
+location /api/ {
+    proxy_pass http://192.168.56.20:3000/;
+}
+```
