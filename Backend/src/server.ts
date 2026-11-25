@@ -1,12 +1,30 @@
 import express from 'express';
+import cors from 'cors';
 import { pool } from './db.js';
 import { interpretarTexto } from './interprete.js';
 
 const app = express();
+
+// Configuración de CORS para permitir solicitudes desde el Frontend (192.168.100.18) y otros orígenes
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
+// Endpoints de comprobación de estado (Healthchecks)
+app.get('/', (_req, res) => res.json({ 
+  status: 'online', 
+  service: 'Backend Gastos Hormiga', 
+  ip: '10.153.187.27',
+  frontend_allowed: '10.153.187.95',
+  db_host: process.env.DB_HOST || '10.153.187.222'
+}));
+app.get('/api', (_req, res) => res.json({ ok: true, version: '1.0.0' }));
 // GET /api/salud
-app.get('/api/salud', (_req, res) => res.json({ ok: true }));
+app.get('/api/salud', (_req, res) => res.json({ ok: true, db_host: process.env.DB_HOST || '10.153.187.222' }));
 
 // POST /api/gastos/texto
 app.post('/api/gastos/texto', async (req, res) => {
@@ -128,5 +146,15 @@ app.post('/api/metas', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Backend corriendo en puerto ${PORT}`));
+const PORT = Number(process.env.PORT) || 3000;
+const HOST = '0.0.0.0';
+
+app.listen(PORT, HOST, () => {
+  console.log(`=========================================`);
+  console.log(`Backend Gastos Hormiga iniciado correctamente`);
+  console.log(`Local:    http://localhost:${PORT}`);
+  console.log(`En red:   http://10.153.187.27:${PORT}`);
+  console.log(`Frontend: Permitido desde 10.153.187.95`);
+  console.log(`Base DB:  ${process.env.DB_HOST || '10.153.187.222'}`);
+  console.log(`=========================================`);
+});

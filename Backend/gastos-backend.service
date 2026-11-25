@@ -1,0 +1,16 @@
+[Unit]
+Description=Backend Sistema Gestor de Gastos Hormiga
+After=network.target
+
+[Service]
+Type=simple
+User=ia
+WorkingDirectory=/home/ia/vm-Backend/Sistema-Gestor-y-Analizador-de-Gastos-Hormiga/Backend
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+RestartSec=5
+Environment=NODE_ENV=production
+EnvironmentFile=/home/ia/vm-Backend/Sistema-Gestor-y-Analizador-de-Gastos-Hormiga/Backend/.env
+
+[Install]
+WantedBy=multi-user.target

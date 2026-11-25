@@ -62,8 +62,18 @@ INSERT INTO palabras_clave (categoria_id, palabra) VALUES
 (6, 'pasaje'), (6, 'trufi'), (6, 'micro'),
 (7, 'almuerzo'), (7, 'comida');
 
--- Usuario API con permisos mínimos solo desde la VM 2 (ubuntuA)
-DROP USER IF EXISTS 'api'@'192.168.100.19';
-CREATE USER 'api'@'192.168.100.19' IDENTIFIED BY 'api123';
-GRANT SELECT, INSERT, UPDATE, DELETE ON gastos_hormiga.* TO 'api'@'192.168.100.19';
+-- Usuario API con permisos desde la VM Backend (10.153.187.27) y cualquier red (%)
+CREATE USER IF NOT EXISTS 'api'@'10.153.187.27' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.153.187.27';
+
+CREATE USER IF NOT EXISTS 'api'@'10.153.187.%' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.153.187.%';
+
+-- Permitir desde cualquier host (%) para no volver a tener problemas al cambiar de Wi-Fi
+CREATE USER IF NOT EXISTS 'api'@'%' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'%';
+
+CREATE USER IF NOT EXISTS 'api'@'localhost' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'localhost';
+
 FLUSH PRIVILEGES;
