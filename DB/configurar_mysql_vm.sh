@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Script de configuración de MySQL para la VM de Base de Datos (10.153.187.222)
-# Ejecutar con privilegios de sudo en la máquina 10.153.187.222
+# Script de configuración de MySQL para la VM de Base de Datos (10.49.123.222)
+# Ejecutar con privilegios de sudo en la máquina 10.49.123.222
 # ==============================================================================
 
 set -e
 
-echo "=== Configurando MySQL en la VM de Base de Datos (10.153.187.222) ==="
+echo "=== Configurando MySQL en la VM de Base de Datos (10.49.123.222) ==="
 
-# 1. Asegurar bind-address = 0.0.0.0 para permitir conexiones remotas desde 10.153.187.27
+# 1. Asegurar bind-address = 0.0.0.0 para permitir conexiones remotas desde 10.49.123.27
 CNF_FILES=(
   "/etc/mysql/mysql.conf.d/mysqld.cnf"
   "/etc/mysql/mariadb.conf.d/50-server.cnf"

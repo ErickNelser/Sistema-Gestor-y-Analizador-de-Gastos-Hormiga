@@ -62,12 +62,12 @@ INSERT INTO palabras_clave (categoria_id, palabra) VALUES
 (6, 'pasaje'), (6, 'trufi'), (6, 'micro'),
 (7, 'almuerzo'), (7, 'comida');
 
--- Usuario API con permisos desde la VM Backend (10.153.187.27) y cualquier red (%)
-CREATE USER IF NOT EXISTS 'api'@'10.153.187.27' IDENTIFIED BY 'api123';
-GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.153.187.27';
+-- Usuario API con permisos desde la VM Backend (10.49.123.27) y cualquier red (%)
+CREATE USER IF NOT EXISTS 'api'@'10.49.123.27' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.49.123.27';
 
-CREATE USER IF NOT EXISTS 'api'@'10.153.187.%' IDENTIFIED BY 'api123';
-GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.153.187.%';
+CREATE USER IF NOT EXISTS 'api'@'10.49.123.%' IDENTIFIED BY 'api123';
+GRANT ALL PRIVILEGES ON gastos_hormiga.* TO 'api'@'10.49.123.%';
 
 -- Permitir desde cualquier host (%) para no volver a tener problemas al cambiar de Wi-Fi
 CREATE USER IF NOT EXISTS 'api'@'%' IDENTIFIED BY 'api123';
