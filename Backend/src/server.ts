@@ -18,13 +18,13 @@ app.use(express.json());
 app.get('/', (_req, res) => res.json({ 
   status: 'online', 
   service: 'Backend Gastos Hormiga', 
-  ip: '10.49.123.27',
-  frontend_allowed: '10.49.123.95',
-  db_host: process.env.DB_HOST || '10.49.123.222'
+  ip: '192.168.119.27',
+  frontend_allowed: '192.168.119.95',
+  db_host: process.env.DB_HOST || '192.168.119.222'
 }));
 app.get('/api', (_req, res) => res.json({ ok: true, version: '1.0.0' }));
 // GET /api/salud
-app.get('/api/salud', (_req, res) => res.json({ ok: true, db_host: process.env.DB_HOST || '10.49.123.222' }));
+app.get('/api/salud', (_req, res) => res.json({ ok: true, db_host: process.env.DB_HOST || '192.168.119.222' }));
 
 // POST /api/gastos/texto
 app.post('/api/gastos/texto', async (req, res) => {
@@ -153,8 +153,8 @@ app.listen(PORT, HOST, () => {
   console.log(`=========================================`);
   console.log(`Backend Gastos Hormiga iniciado correctamente`);
   console.log(`Local:    http://localhost:${PORT}`);
-  console.log(`En red:   http://10.49.123.27:${PORT}`);
-  console.log(`Frontend: Permitido desde 10.49.123.95`);
-  console.log(`Base DB:  ${process.env.DB_HOST || '10.49.123.222'}`);
+  console.log(`En red:   http://192.168.119.27:${PORT}`);
+  console.log(`Frontend: Permitido desde 192.168.119.95`);
+  console.log(`Base DB:  ${process.env.DB_HOST || '192.168.119.222'}`);
   console.log(`=========================================`);
 });
