@@ -8,32 +8,32 @@ Guía completa de arquitectura, despliegue y puesta en marcha para entorno distr
 
 | Componente | Rol | Sistema Operativo | IP Asignada | Puerto(s) |
 | :--- | :--- | :--- | :--- | :--- |
-| **VM 1 - FrontEnd** | Interfaz Web React + Vite | Windows 11 | `192.168.119.95` | `5173` (Dev) / `80` (Nginx Prod) |
-| **VM 2 - BackEnd** | API REST Node.js + Express | Ubuntu Linux (Este Servidor) | `192.168.119.27` | `3000` |
-| **VM 3 - DataBase** | Motor de Base de Datos MySQL | Ubuntu Linux | `192.168.119.222` | `3306` |
+| **VM 1 - FrontEnd** | Interfaz Web React + Vite | Windows 11 | `192.168.56.10` | `5173` (Dev) / `80` (Nginx Prod) |
+| **VM 2 - BackEnd** | API REST Node.js + Express | Ubuntu Linux (Este Servidor) | `192.168.56.11` | `3000` |
+| **VM 3 - DataBase** | Motor de Base de Datos MySQL | Ubuntu Linux | `192.168.56.12` | `3306` |
 
 ---
 
-## 🛠️ Configuraciones Realizadas en el Servidor Backend (`192.168.119.27`)
+## 🛠️ Configuraciones Realizadas en el Servidor Backend (`192.168.56.11`)
 
 1. **Variables de Entorno (`Backend/.env`)**:
-   - `DB_HOST=192.168.119.222`
+   - `DB_HOST=192.168.56.12`
    - `DB_USER=api`
    - `DB_PASS=api123`
    - `DB_NAME=gastos_hormiga`
    - `PORT=3000`
 2. **CORS Habilitado**:
-   - `Backend/src/server.ts` permite peticiones desde cualquier origen, especialmente desde `http://192.168.119.95:5173`.
+   - `Backend/src/server.ts` permite peticiones desde cualquier origen, especialmente desde `http://192.168.56.10:5173`.
 3. **Escucha en `0.0.0.0:3000`**:
    - El backend acepta tráfico externo en el puerto 3000.
 4. **Frontend `.env`**:
-   - Apuntando a `VITE_API_URL=http://192.168.119.27:3000`.
+   - Apuntando a `VITE_API_URL=http://192.168.56.11:3000`.
 
 ---
 
 ## ⚡ Comandos Rápidos de Ejecución (Orden de Arranque)
 
-### 1️⃣ En la VM 3 - DataBase (`192.168.119.222`)
+### 1️⃣ En la VM 3 - DataBase (`192.168.56.12`)
 ```bash
 sudo systemctl start mysql
 ```
@@ -41,7 +41,7 @@ sudo systemctl start mysql
 
 ---
 
-### 2️⃣ En la VM 2 - BackEnd (`192.168.119.27` - Este Servidor)
+### 2️⃣ En la VM 2 - BackEnd (`192.168.56.11` - Este Servidor)
 ```bash
 cd /home/ia/vm-Backend/Sistema-Gestor-y-Analizador-de-Gastos-Hormiga/Backend
 
@@ -55,7 +55,7 @@ npm run dev
 
 ---
 
-### 3️⃣ En la VM 1 - FrontEnd (`192.168.119.95` - Win11)
+### 3️⃣ En la VM 1 - FrontEnd (`192.168.56.10` - Win11)
 Abre PowerShell o terminal en la carpeta `FrontEnd`:
 ```bash
 npm run dev -- --host
@@ -65,4 +65,4 @@ npm run dev -- --host
 
 ### 🌐 Abrir la Aplicación:
 Abre el navegador en cualquier máquina conectada a la red e ingresa a:
-**`http://192.168.119.95:5173`**
+**`http://192.168.56.10:5173`**

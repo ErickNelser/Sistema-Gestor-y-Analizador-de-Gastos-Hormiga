@@ -41,8 +41,8 @@ El diseño ha sido optimizado profesionalmente utilizando una combinación crom�
 El archivo `.env` permite configurar la IP o URL del backend al cual Vite redirige las peticiones `/api`:
 
 ```bash
-# Conexión hacia la VM de Backend (192.168.119.27):
-VITE_API_URL=http://192.168.119.27:3000
+# Conexión hacia la VM de Backend (192.168.56.11):
+VITE_API_URL=http://192.168.56.11:3000
 
 # Desarrollo local en la misma máquina (opcional):
 # VITE_API_URL=http://localhost:3000
@@ -53,16 +53,16 @@ VITE_API_URL=http://192.168.119.27:3000
 npm install
 npm run dev -- --host
 ```
-La aplicación estará disponible en la red en `http://192.168.119.95:5173` (o `http://localhost:5173`).
+La aplicación estará disponible en la red en `http://192.168.56.10:5173` (o `http://localhost:5173`).
 
 ### 4. Compilación para Producción (Nginx / VM 1)
 ```bash
 npm run build
 ```
 Los archivos estáticos listos para producción se generan en la carpeta `dist/`.
-En Nginx (VM 1 en 192.168.119.95), configura la raíz hacia esta carpeta `dist/` y el proxy inverso para `/api`:
+En Nginx (VM 1 en 192.168.56.10), configura la raíz hacia esta carpeta `dist/` y el proxy inverso para `/api`:
 ```nginx
 location /api/ {
-    proxy_pass http://192.168.119.27:3000/api/;
+    proxy_pass http://192.168.56.11:3000/api/;
 }
 ```
